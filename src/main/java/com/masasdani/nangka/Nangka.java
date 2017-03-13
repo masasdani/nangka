@@ -10,10 +10,18 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
 /**
- * Created by masasdani on 8/2/16.
+ *
+ * Guesses the DateUnit containing dates of the input String
+ *
+ * @author masasdani
  */
 public class Nangka {
 
+    /**
+     * @param text
+     * @return
+     * @throws ParseException
+     */
     public DateUnit parse(String text) throws ParseException {
         try {
             ANTLRNoCaseInputStream stream = new ANTLRNoCaseInputStream(

@@ -1,7 +1,10 @@
 package com.masasdani.nangka;
 
 /**
- * Created by masasdani on 8/12/16.
+ *
+ * Parse Exception
+ *
+ * @author masasdani
  */
 public class ParseException extends Exception {
 

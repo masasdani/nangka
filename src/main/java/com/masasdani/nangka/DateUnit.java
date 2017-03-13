@@ -4,7 +4,9 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by masasdani on 8/3/16.
+ * Result of the date parsing will be stored here
+ *
+ * @author masasdani
  */
 public class DateUnit {
 

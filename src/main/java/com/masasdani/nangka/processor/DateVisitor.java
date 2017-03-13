@@ -11,7 +11,10 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by masasdani on 8/8/16.
+ *
+ * Processing the antrl rule to a DateTime
+ *
+ * @author masasdani
  */
 public class DateVisitor extends DateBaseVisitor {
 
