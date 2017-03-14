@@ -19,7 +19,7 @@
         <connection>scm:git:https://github.com/masasdani/nangka</connection>
         <developerConnection>scm:git:https://github.com/masasdani/nangka</developerConnection>
         <url>https://github.com/masasdani/nangka</url>
-        <tag>nangka-0.0.2</tag>
+        <tag>nangka-0.0.5</tag>
     </scm>
     <developers>
         <developer>
@@ -97,6 +97,24 @@
                 </executions>
             </plugin>
 
+            <!-- Deploy Plugin -->
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.0.0</version>
+                <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
@@ -104,84 +122,57 @@
                 <executions>
                     <execution>
                         <id>attach-sources</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>jar-no-fork</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <!-- Required: javadoc JAR -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>2.10.4</version>
-                <executions>
-                    <execution>
-                        <id>attach-javadoc</id>
-                        <phase>verify</phase>
                         <goals>
                             <goal>jar</goal>
                         </goals>
                     </execution>
                 </executions>
             </plugin>
-
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>cobertura-maven-plugin</artifactId>
-                <version>2.7</version>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-site-plugin</artifactId>
-                <version>3.6</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <version>3.0.0</version>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-release-plugin</artifactId>
-                <version>2.5.3</version>
+                <artifactId>maven-javadoc-plugin</artifactId>
                 <configuration>
-                    <!-- Automated passphrase entry: -->
-
-                    <!-- To pass your passphrase to the build automatically, so avoiding
-                    manual interaction, you'll need to put the passphrase into settings.xml.
-                    You don't really want that to be in plain text, so you'll want to follow:
-                    http://maven.apache.org/guides/mini/guide-encryption.html -->
-                    <!-- <arguments>-Dgpg.passphrase=${gpg.passphrase}</arguments> -->
-
-                    <!-- Manual passphrase entry: -->
-
-                    <!-- This is the simplest secure solution, but requires you to type
-                    your key passphrase in manually when performing a release. No biggie unless
-                    you want your CI server to decide when to release for you. -->
-                    <mavenExecutorId>forked-path</mavenExecutorId>
+                    <quiet>true</quiet>
+                    <nonavbar>true</nonavbar>
+                    <notree>true</notree>
+                    <nocomment>true</nocomment>
+                    <nohelp>true</nohelp>
                 </configuration>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
-
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
-                <version>1.6</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
+
         <pluginManagement>
             <plugins>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-source-plugin</artifactId>
-                    <version>2.2.1</version>
+                    <version>3.0.1</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-deploy-plugin</artifactId>
-                    <version>2.8.1</version>
+                    <version>2.8.2</version>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -221,9 +212,6 @@
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
                         <version>1.6</version>
-                        <configuration>
-                            <passphrase>${gpg.passphrase}</passphrase>
-                        </configuration>
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>
