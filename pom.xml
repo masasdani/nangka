@@ -4,7 +4,7 @@
 
     <groupId>com.masasdani</groupId>
     <artifactId>nangka</artifactId>
-    <version>0.0.2-SNAPSHOT</version>
+    <version>0.0.2</version>
     <packaging>jar</packaging>
     <name>com.masasdani:nangka</name>
     <description>Natural Language Date Parser Library for Java, build using ANTLR4 Library. support for Indonesian and English.</description>
