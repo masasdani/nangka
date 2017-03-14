@@ -1,8 +1,7 @@
 Nangka Project
 ==============
 
-This is a Natural Language Date Parser Library for Java, build using ANTLR4 Library. support for Indonesian and English
-This project is still on experimental stage.
+This is a Natural Language Date Parser Library for Java, build using ANTLR4 Library. Currently support for Indonesian and English
 
 Prerequisites:
 ==============
