@@ -15,7 +15,7 @@ import java.util.Date;
  */
 public class NangkaTest {
 
-    String exprEn = "a month later";
+    String exprEn = "a month later, 20-11-90";
 
     @Test
     public void test1(){

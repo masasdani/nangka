@@ -99,19 +99,19 @@ public class DateVisitor extends DateBaseVisitor {
     @Override
     public DateTime visitDay_month_year(DateParser.Day_month_yearContext ctx) {
         return visitDay_month(ctx.day_month())
-                .withYear(Integer.valueOf(ctx.year().getText()));
+                .withYear(convert2digitYear(Integer.valueOf(ctx.year().getText())));
     }
 
     @Override
     public DateTime visitYear_month_day(DateParser.Year_month_dayContext ctx) {
         return visitMonth_day(ctx.month_day())
-                .withYear(Integer.valueOf(ctx.year().getText()));
+                .withYear(convert2digitYear(Integer.valueOf(ctx.year().getText())));
     }
 
     @Override
     public DateTime visitMonth_day_year(DateParser.Month_day_yearContext ctx) {
         return visitMonth_day(ctx.month_day())
-                .withYear(Integer.valueOf(ctx.year().getText()));
+                .withYear(convert2digitYear(Integer.valueOf(ctx.year().getText())));
     }
 
     @Override
@@ -212,7 +212,7 @@ public class DateVisitor extends DateBaseVisitor {
         }
         if(notNull(ctx.year())){
             return reference.toDateTime()
-                    .withYear(Integer.valueOf(ctx.year().getText()))
+                    .withYear(convert2digitYear(Integer.valueOf(ctx.year().getText())))
                     .withDayOfYear(0);
         }
         if(notNull(ctx.relative_date_past())){
@@ -228,7 +228,7 @@ public class DateVisitor extends DateBaseVisitor {
     public DateTime visitMonth_year(DateParser.Month_yearContext ctx) {
         return reference
                 .withMonthOfYear(Integer.valueOf(ctx.month().mm))
-                .withYear(Integer.valueOf(ctx.year().getText()))
+                .withYear(convert2digitYear(Integer.valueOf(ctx.year().getText())))
                 .withTimeAtStartOfDay();
     }
 
@@ -236,7 +236,7 @@ public class DateVisitor extends DateBaseVisitor {
     public DateTime visitWeek_of_month(DateParser.Week_of_monthContext ctx) {
         DateTime dateTime = reference;
         if(notNull(ctx.year())){
-            dateTime = dateTime.withYear(Integer.valueOf(ctx.year().getText()));
+            dateTime = dateTime.withYear(convert2digitYear(Integer.valueOf(ctx.year().getText())));
         }
         if(notNull(ctx.month())){
             dateTime = dateTime.withMonthOfYear(Integer.valueOf(ctx.month().mm));
@@ -255,4 +255,18 @@ public class DateVisitor extends DateBaseVisitor {
         return o != null;
     }
 
+    private int convert2digitYear(int year) {
+        if (year < 100) {
+            int currentYear = DateTime.now().getYear();
+            int century = currentYear / 100;
+            int modYear = currentYear % 100;
+            if(year > modYear) {
+                return ( (century - 1 ) * 100 ) + year;
+            } else {
+                return ( century * 100 ) + year;
+            }
+        } else {
+            return year;
+        }
+    }
 }
