@@ -3,24 +3,30 @@ Nangka Project
 
 This is a Natural Language Date Parser Library for Java, build using ANTLR4 Library. Currently support for Indonesian and English
 
-Prerequisites:
-==============
-*	Java JDK-1.7 or higher
-*	Apache Maven 3 or higher
-*	Please refer http://maven.apache.org/guides/getting-started/maven-in-five-minutes.html for any help in Maven.
+It's now available in maven central. latest version: 0.0.6
 
 Usage
 =====
-
-clone and install this project to your system
-
-        mvn clean install
 
 add this project as dependency of your project
 
 	    <dependency>
             <groupId>com.masasdani</groupId>
             <artifactId>nangka</artifactId>
-            <version>0.0.1</version>
+            <version>0.0.6</version>
         </dependency>
 
+Sample usage :
+        
+        String exprEn = "a month later, 20-11-90";
+        Nangka nangka = new Nangka();
+        DateUnit dateUnit = nangka.parse(exprEn);
+        for(Date date : dateUnit.getRelatedDates()){
+            System.out.println(date);
+        }
+        
+The DateUnit class contains 
+* unit (the most relevant date from the text given)
+* start (first of relevant date from the text)
+* end (end od relevant date from the text)
+* relatedDates (all the dates found from the text)
