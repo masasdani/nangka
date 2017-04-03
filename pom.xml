@@ -6,21 +6,25 @@
     <artifactId>nangka</artifactId>
     <version>0.0.7-SNAPSHOT</version>
     <packaging>jar</packaging>
+
     <name>com.masasdani:nangka</name>
     <description>Natural Language Date Parser Library for Java, build using ANTLR4 Library. support for Indonesian and English.</description>
     <url>https://github.com/masasdani/nangka</url>
+
     <licenses>
         <license>
             <name>Apache 2</name>
             <url>http://www.apache.org/licenses/LICENSE-2.0</url>
         </license>
     </licenses>
+
     <scm>
         <connection>scm:git:https://github.com/masasdani/nangka</connection>
         <developerConnection>scm:git:https://github.com/masasdani/nangka</developerConnection>
         <url>https://github.com/masasdani/nangka</url>
         <tag>nangka-0.0.5</tag>
     </scm>
+
     <developers>
         <developer>
             <name>Masas Dani</name>
@@ -28,29 +32,42 @@
         </developer>
     </developers>
 
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>1.8</java.version>
+        <antlr4.version>4.5.3</antlr4.version>
+        <junit.version>4.12</junit.version>
+        <jodatime.version>2.9.4</jodatime.version>
+        <maven.compiler.version>3.5.1</maven.compiler.version>
+        <maven.assembly.version>3.0.0</maven.assembly.version>
+        <maven.source.version>3.0.1</maven.source.version>
+        <maven.javadoc.version>2.10.4</maven.javadoc.version>
+        <maven.gpg.version>1.6</maven.gpg.version>
+        <maven.deploy.version>2.8.2</maven.deploy.version>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.antlr</groupId>
             <artifactId>antlr4-runtime</artifactId>
-            <version>4.5.3</version>
+            <version>${antlr4.version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/joda-time/joda-time -->
         <dependency>
             <groupId>joda-time</groupId>
             <artifactId>joda-time</artifactId>
-            <version>2.9.4</version>
+            <version>${jodatime.version}</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.1</version>
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
 
     <build>
         <resources>
-            <resource><!-- this is default, but because we tamper with the resources, we need to explicitly mention it. -->
+            <resource>
                 <directory>src/main/resources</directory>
             </resource>
             <resource>
@@ -67,10 +84,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.5.1</version>
+                <version>${maven.compiler.version}</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                     <showDeprecation>true</showDeprecation>
                     <showWarnings>true</showWarnings>
                 </configuration>
@@ -80,7 +97,7 @@
             <plugin>
                 <groupId>org.antlr</groupId>
                 <artifactId>antlr4-maven-plugin</artifactId>
-                <version>4.5.3</version>
+                <version>${antlr4.version}</version>
 
                 <executions>
                     <execution>
@@ -100,7 +117,7 @@
             <!-- Deploy Plugin -->
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
-                <version>3.0.0</version>
+                <version>${maven.assembly.version}</version>
                 <configuration>
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
@@ -118,7 +135,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
-                <version>3.0.1</version>
+                <version>${maven.source.version}</version>
                 <executions>
                     <execution>
                         <id>attach-sources</id>
@@ -131,7 +148,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>2.10.4</version>
+                <version>${maven.javadoc.version}</version>
                 <configuration>
                     <quiet>true</quiet>
                     <nonavbar>true</nonavbar>
@@ -151,7 +168,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
-                <version>1.6</version>
+                <version>${maven.gpg.version}</version>
                 <executions>
                     <execution>
                         <id>sign-artifacts</id>
@@ -169,12 +186,12 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-source-plugin</artifactId>
-                    <version>3.0.1</version>
+                    <version>${maven.source.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-deploy-plugin</artifactId>
-                    <version>2.8.2</version>
+                    <version>${maven.deploy.version}</version>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -213,7 +230,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>1.6</version>
+                        <version>${maven.gpg.version}</version>
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>
